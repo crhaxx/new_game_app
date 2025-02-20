@@ -1,31 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:new_game_app/auth/auth_service.dart';
-import 'package:new_game_app/pages/register_page.dart';
+import 'package:new_game_app/pages/login_page.dart';
 
-class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+class RegisterPage extends StatefulWidget {
+  const RegisterPage({super.key});
 
   @override
-  State<LoginPage> createState() => _LoginPageState();
+  State<RegisterPage> createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   //Note: Get auth service
   final authService = AuthService();
 
   //Note: text controllers
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
+  final _confirmPasswordController = TextEditingController();
 
-  //Note: Login button pressed
-  void login() async {
+  //Note: Sign Up button pressed
+  void signUp() async {
     //Note: Prepare data
     final email = _emailController.text;
     final password = _passwordController.text;
+    final confirmPassword = _confirmPasswordController.text;
 
-    //Note: Try to login
+    //Note: Check if passwords match
+    if (password != confirmPassword) {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Passwords don't match")));
+      return;
+    }
+
+    //Note: Try to sign up
     try {
-      await authService.signInWithEmailAndPassword(email, password);
+      await authService.signUpWithEmailAndPassword(email, password);
+
+      Navigator.pop(context);
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context)
@@ -38,7 +49,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Login"),
+        title: Text("Sign Up"),
         centerTitle: true,
       ),
       body: ListView(
@@ -57,14 +68,21 @@ class _LoginPageState extends State<LoginPage> {
             obscureText: true,
           ),
 
+          //Note: Confirm password
+          TextField(
+            controller: _confirmPasswordController,
+            decoration: InputDecoration(labelText: "Confirm Password"),
+            obscureText: true,
+          ),
+
           SizedBox(
             height: 12,
           ),
 
-          //Note: Login button
+          //Note: Sign Up button
           ElevatedButton(
-            onPressed: login,
-            child: const Text("Login"),
+            onPressed: signUp,
+            child: const Text("Sign Up"),
           ),
 
           SizedBox(
@@ -73,8 +91,8 @@ class _LoginPageState extends State<LoginPage> {
 
           GestureDetector(
               onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => RegisterPage())),
-              child: Center(child: Text("Don't have an account? Sign Up")))
+                  MaterialPageRoute(builder: (context) => LoginPage())),
+              child: Center(child: Text("Have an account? Login")))
         ],
       ),
     );
