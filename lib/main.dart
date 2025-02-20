@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:new_game_app/pages/app_start.dart';
 
 void main() {
   runApp(const MainApp());
@@ -9,12 +10,9 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: Scaffold(
-        body: Center(
-          child: Text('Hello World!'),
-        ),
-      ),
+    return MaterialApp(
+      debugShowCheckedModeBanner: false,
+      home: AppStart(),
     );
   }
 }
