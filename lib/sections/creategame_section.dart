@@ -10,6 +10,8 @@ class CreategamePage extends StatefulWidget {
 class _CreategamePageState extends State<CreategamePage> {
   int currentPageIndex = 0;
 
+  void createGame() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -17,7 +19,10 @@ class _CreategamePageState extends State<CreategamePage> {
         title: Text("Create Game"),
         centerTitle: true,
       ),
-      body: Center(),
+      body: Center(
+        child:
+            ElevatedButton(onPressed: createGame, child: Text("Create Game")),
+      ),
     );
   }
 }

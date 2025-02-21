@@ -1,5 +1,5 @@
 import "package:flutter/material.dart";
-import "package:new_game_app/database/userinfo_database.dart";
+import "package:new_game_app/database/creategame_table.dart";
 import "package:supabase_flutter/supabase_flutter.dart";
 
 class ProfileSection extends StatefulWidget {
