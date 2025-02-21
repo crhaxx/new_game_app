@@ -1,7 +1,7 @@
 import 'package:new_game_app/database/database%20models/creategame_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
-class UserinfoDatabase {
+class CreategameTable {
   //Info: Database -> playlists
   final database = Supabase.instance.client.from('active_games');
 

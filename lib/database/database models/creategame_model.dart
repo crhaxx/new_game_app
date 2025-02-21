@@ -2,15 +2,19 @@ class CreategameModel {
   int? id;
   String game;
   String creator;
-  String creator_email;
-  String created_at;
+  String? creator_email;
+  String? created_at;
+  String invited_users;
+  bool public;
 
   CreategameModel({
-    required this.id,
+    this.id,
     required this.game,
     required this.creator,
     required this.creator_email,
-    required this.created_at,
+    this.created_at,
+    required this.invited_users,
+    required this.public,
   });
 
   //Info: map -> Userinfo
@@ -21,17 +25,19 @@ class CreategameModel {
       creator: map['creator'] as String,
       creator_email: map['creator_email'] as String,
       created_at: map['created_at'] as String,
+      invited_users: map['invited_users'] as String,
+      public: map['public'] as bool,
     );
   }
 
   //Info: Userinfo -> map
   Map<String, dynamic> toMap() {
     return {
-      'id': id,
       'game': game,
       'creator': creator,
       'creator_email': creator_email,
-      'created_at': created_at,
+      'invited_users': invited_users,
+      'public': public,
     };
   }
 }

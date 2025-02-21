@@ -1,5 +1,4 @@
 import "package:flutter/material.dart";
-import "package:new_game_app/database/creategame_table.dart";
 import "package:supabase_flutter/supabase_flutter.dart";
 
 class ProfileSection extends StatefulWidget {
@@ -10,8 +9,6 @@ class ProfileSection extends StatefulWidget {
 }
 
 class _ProfileSectionState extends State<ProfileSection> {
-  final userinfoDatabase = UserinfoDatabase();
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
