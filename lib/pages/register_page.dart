@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:new_game_app/auth/auth_service.dart';
+import 'package:new_game_app/database/auth/auth_service.dart';
 import 'package:new_game_app/pages/login_page.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -14,6 +14,7 @@ class _RegisterPageState extends State<RegisterPage> {
   final authService = AuthService();
 
   //Note: text controllers
+  final _usernameController = TextEditingController();
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
@@ -21,6 +22,7 @@ class _RegisterPageState extends State<RegisterPage> {
   //Note: Sign Up button pressed
   void signUp() async {
     //Note: Prepare data
+    final username = _usernameController.text;
     final email = _emailController.text;
     final password = _passwordController.text;
     final confirmPassword = _confirmPasswordController.text;
@@ -34,8 +36,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
     //Note: Try to sign up
     try {
-      await authService.signUpWithEmailAndPassword(email, password);
-
+      await authService.signUpWithEmailAndPassword(email, password, username);
       Navigator.pop(context);
     } catch (e) {
       if (mounted) {
@@ -55,6 +56,12 @@ class _RegisterPageState extends State<RegisterPage> {
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 12, vertical: 50),
         children: [
+          //Note: Username
+          TextField(
+            controller: _usernameController,
+            decoration: InputDecoration(labelText: "Username"),
+          ),
+
           //Note: Email
           TextField(
             controller: _emailController,

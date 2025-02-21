@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
-import "package:new_game_app/auth/auth_service.dart";
+import "package:new_game_app/database/userinfo_database.dart";
+import "package:supabase_flutter/supabase_flutter.dart";
 
 class ProfileSection extends StatefulWidget {
   const ProfileSection({super.key});
@@ -9,18 +10,18 @@ class ProfileSection extends StatefulWidget {
 }
 
 class _ProfileSectionState extends State<ProfileSection> {
-  final currentEmail = AuthService().getCurrentUserEmail();
+  final userinfoDatabase = UserinfoDatabase();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Profile"),
-        centerTitle: true,
-      ),
-      body: Center(
-        child: Text(currentEmail.toString()),
-      ),
-    );
+        appBar: AppBar(
+          title: Text(""),
+          centerTitle: true,
+        ),
+        body: Center(
+          child: Text(Supabase
+              .instance.client.auth.currentUser?.userMetadata?['username']),
+        ));
   }
 }

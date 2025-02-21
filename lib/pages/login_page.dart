@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:new_game_app/auth/auth_service.dart';
+import 'package:new_game_app/database/auth/auth_service.dart';
 import 'package:new_game_app/pages/register_page.dart';
 
 class LoginPage extends StatefulWidget {
