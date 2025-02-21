@@ -23,6 +23,12 @@ class _LoginPageState extends State<LoginPage> {
     final email = _emailController.text;
     final password = _passwordController.text;
 
+    if (email == "" || password == "") {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("Please fill in all fields")));
+      return;
+    }
+
     //Note: Try to login
     try {
       await authService.signInWithEmailAndPassword(email, password);
@@ -37,45 +43,64 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Login"),
-        centerTitle: true,
-      ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 50),
-        children: [
-          //Note: Email
-          TextField(
-            controller: _emailController,
-            decoration: InputDecoration(labelText: "Email"),
-          ),
+      body: Container(
+        decoration: BoxDecoration(color: Colors.grey.shade200),
+        child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 70),
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Welcome to the login page",
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "Please login to access the app.",
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                ),
+              ],
+            ),
 
-          //Note: Password
-          TextField(
-            controller: _passwordController,
-            decoration: InputDecoration(labelText: "Password"),
-            obscureText: true,
-          ),
+            SizedBox(
+              height: 50,
+            ),
 
-          SizedBox(
-            height: 12,
-          ),
+            //Note: Email
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(
+                  labelText: "Email", prefixIcon: Icon(Icons.email)),
+            ),
 
-          //Note: Login button
-          ElevatedButton(
-            onPressed: login,
-            child: const Text("Login"),
-          ),
+            //Note: Password
+            TextField(
+              controller: _passwordController,
+              decoration: InputDecoration(
+                  labelText: "Password", prefixIcon: Icon(Icons.key)),
+              obscureText: true,
+            ),
 
-          SizedBox(
-            height: 12,
-          ),
+            SizedBox(
+              height: 12,
+            ),
 
-          GestureDetector(
-              onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => RegisterPage())),
-              child: Center(child: Text("Don't have an account? Sign Up")))
-        ],
+            //Note: Login button
+            ElevatedButton(
+              onPressed: login,
+              child: const Text("Login"),
+            ),
+
+            SizedBox(
+              height: 12,
+            ),
+
+            GestureDetector(
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => RegisterPage())),
+                child: Center(child: Text("Don't have an account? Sign Up")))
+          ],
+        ),
       ),
     );
   }

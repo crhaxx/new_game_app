@@ -34,6 +34,18 @@ class _RegisterPageState extends State<RegisterPage> {
       return;
     }
 
+    if (username == "" || email == "" || password == "") {
+      ScaffoldMessenger.of(context)
+          .showSnackBar(SnackBar(content: Text("All fields are required")));
+      return;
+    }
+
+    if (password.length < 6) {
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+          content: Text("Password must be at least 6 characters long")));
+      return;
+    }
+
     //Note: Try to sign up
     try {
       await authService.signUpWithEmailAndPassword(email, password, username);
@@ -49,58 +61,88 @@ class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Sign Up"),
-        centerTitle: true,
-      ),
-      body: ListView(
-        padding: EdgeInsets.symmetric(horizontal: 12, vertical: 50),
-        children: [
-          //Note: Username
-          TextField(
-            controller: _usernameController,
-            decoration: InputDecoration(labelText: "Username"),
-          ),
+      body: Container(
+        decoration: BoxDecoration(color: Colors.grey.shade200),
+        child: ListView(
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 70),
+          children: [
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  "Welcome to the Signup page",
+                  style: TextStyle(fontSize: 25, fontWeight: FontWeight.w600),
+                ),
+                Text(
+                  "Here you can create a new account",
+                  style: TextStyle(fontSize: 17, fontWeight: FontWeight.w600),
+                ),
+              ],
+            ),
 
-          //Note: Email
-          TextField(
-            controller: _emailController,
-            decoration: InputDecoration(labelText: "Email"),
-          ),
+            SizedBox(
+              height: 50,
+            ),
 
-          //Note: Password
-          TextField(
-            controller: _passwordController,
-            decoration: InputDecoration(labelText: "Password"),
-            obscureText: true,
-          ),
+            //Note: Username
+            TextField(
+              controller: _usernameController,
+              decoration: InputDecoration(
+                  labelText: "Username", prefixIcon: Icon(Icons.person)),
+            ),
 
-          //Note: Confirm password
-          TextField(
-            controller: _confirmPasswordController,
-            decoration: InputDecoration(labelText: "Confirm Password"),
-            obscureText: true,
-          ),
+            //Note: Email
+            TextField(
+              controller: _emailController,
+              decoration: InputDecoration(
+                  labelText: "Email", prefixIcon: Icon(Icons.email)),
+            ),
 
-          SizedBox(
-            height: 12,
-          ),
+            //Note: Password
+            TextField(
+              controller: _passwordController,
+              decoration: InputDecoration(
+                  labelText: "Password", prefixIcon: Icon(Icons.key)),
+              obscureText: true,
+            ),
 
-          //Note: Sign Up button
-          ElevatedButton(
-            onPressed: signUp,
-            child: const Text("Sign Up"),
-          ),
+            //Note: Confirm password
+            TextField(
+              controller: _confirmPasswordController,
+              decoration: InputDecoration(
+                  labelText: "Confirm Password", prefixIcon: Icon(Icons.key)),
+              obscureText: true,
+            ),
 
-          SizedBox(
-            height: 12,
-          ),
+            SizedBox(
+              height: 30,
+            ),
 
-          GestureDetector(
-              onTap: () => Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => LoginPage())),
-              child: Center(child: Text("Have an account? Login")))
-        ],
+            //Note: Sign Up button
+            Container(
+              height: 50,
+              width: 50,
+              child: ElevatedButton(
+                onPressed: signUp,
+                child: Text(
+                  "Sign Up",
+                ),
+              ),
+            ),
+
+            SizedBox(
+              height: 20,
+            ),
+
+            GestureDetector(
+                onTap: () => Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => LoginPage())),
+                child: Center(
+                    child: Text(
+                  "Have an account? Login",
+                )))
+          ],
+        ),
       ),
     );
   }
