@@ -42,11 +42,7 @@ class _GameInfoState extends State<GameInfo> {
               child: Row(
                 children: [
                   Text(
-                    "Creator: " +
-                        widget.gameCreator +
-                        "\n" +
-                        "Creator Email: " +
-                        widget.gameCreatorEmail,
+                    "${widget.gamePublic ? "Public" : "Private"}\nCreator: ${widget.gameCreator}\nCreator Email: ${widget.gameCreatorEmail}",
                     style: TextStyle(fontSize: 15),
                   ),
                 ],
