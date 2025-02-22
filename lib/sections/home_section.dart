@@ -2,6 +2,7 @@ import "package:flutter/material.dart";
 import "package:new_game_app/components/drawer_component.dart";
 import "package:new_game_app/database/auth/auth_service.dart";
 import "package:new_game_app/database/creategame_table.dart";
+import "package:new_game_app/pages/game_info.dart";
 import "package:new_game_app/sections/profile_section.dart";
 
 class InvitesPage extends StatefulWidget {
@@ -55,8 +56,31 @@ class _InvitesPageState extends State<InvitesPage> {
                 return ListTile(
                   title: Text(game.game),
                   subtitle: Text(game.creator),
+                  leading: game.public
+                      ? Icon(Icons.public)
+                      : Icon(Icons.private_connectivity),
+                  trailing: SizedBox(
+                    width: 100,
+                    child: Row(
+                      children: [
+                        IconButton(onPressed: () {}, icon: Icon(Icons.check)),
+                        IconButton(
+                            onPressed: () {}, icon: Icon(Icons.not_interested)),
+                      ],
+                    ),
+                  ),
                   onTap: () {
                     //Note: Navigate to game page with game details
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => GameInfo(
+                                  gameCreator: game.creator,
+                                  gameCreatorEmail: game.creator_email,
+                                  gameInvitedUsers: game.invited_users,
+                                  gameName: game.game,
+                                  gamePublic: game.public,
+                                )));
                   },
                 );
               },

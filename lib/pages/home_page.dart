@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.new_label),
-            label: 'Create Game',
+            label: 'Invite to play',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
