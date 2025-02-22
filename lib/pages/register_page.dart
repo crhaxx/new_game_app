@@ -46,6 +46,8 @@ class _RegisterPageState extends State<RegisterPage> {
       return;
     }
 
+    //Todo: Check if Email exists
+
     //Note: Try to sign up
     try {
       await authService.signUpWithEmailAndPassword(email, password, username);

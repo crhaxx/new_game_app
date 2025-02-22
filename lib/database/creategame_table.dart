@@ -18,14 +18,15 @@ class CreategameTable {
           .toList());
 
   //Note: Update
-  Future updateGame(CreategameModel oldGameModel, String newGameModel) async {
-    await database.update({
-      'game': newGameModel,
-    }).eq('id', oldGameModel.id!);
+  Future updateGame(CreategameModel oldGameModel, String newGameName,
+      String newGameInvitedUsers) async {
+    await database
+        .update({'game': newGameName, 'invited_users': newGameInvitedUsers}).eq(
+            'id', oldGameModel.id!);
   }
 
   //Note: Delete
-  Future deleteGame(CreategameModel gameModel) async {
-    await database.delete().eq('id', gameModel.id!);
+  Future deleteGame(int id) async {
+    await database.delete().eq('id', id);
   }
 }
