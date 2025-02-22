@@ -41,7 +41,7 @@ flutter pub add flutter_dotenv
 # ⚙️ Customize your settings
 
 Create a new project in the [supabase](https://supabase.com/).
-Create an **.env** file in `new_game_app` folder and set the values of **anonKey** and **url**. You can find them in your supabase project.
+Create an **.env** file in `new_game_app` folder and set the values of **anonKey** and **url**. You can find them in your supabase project. [Click here](https://supabase.com/docs/guides/api/creating-routes#api-url-and-keys) to open the tutorial to search for anonKey and the project url.
 
 **.env**
 
