@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:new_game_app/pages/about_page.dart';
+import 'package:Gamebuddy/pages/about_page.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:new_game_app/sections/creategame_section.dart';
-import 'package:new_game_app/sections/home_section.dart';
-import 'package:new_game_app/sections/setting_section.dart';
+import 'package:Gamebuddy/sections/creategame_section.dart';
+import 'package:Gamebuddy/sections/home_section.dart';
+import 'package:Gamebuddy/sections/setting_section.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({super.key});

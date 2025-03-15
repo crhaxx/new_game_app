@@ -1,9 +1,9 @@
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
-import "package:new_game_app/database/creategame_table.dart";
-import "package:new_game_app/database/database%20models/creategame_model.dart";
-import "package:new_game_app/pages/game_info.dart";
-import "package:new_game_app/pages/home_page.dart";
+import "package:Gamebuddy/database/creategame_table.dart";
+import "package:Gamebuddy/database/database%20models/creategame_model.dart";
+import "package:Gamebuddy/pages/game_info.dart";
+import "package:Gamebuddy/pages/home_page.dart";
 import "package:supabase_flutter/supabase_flutter.dart";
 
 class CreategamePage extends StatefulWidget {
@@ -30,11 +30,23 @@ class _CreategamePageState extends State<CreategamePage> {
     final gameName = _gameNameController.text;
     final invitedUsers = _invitedUsersController.text;
 
+    String listUsers = invitedUsers.trim();
+    var users = (listUsers.split(','));
+
+    int counter = 0;
+    do {
+      print(users[counter]);
+
+      Supabase.instance.client.auth.getUser();
+      counter++;
+    } while (counter < users.length);
+
     if (gameName == "" || invitedUsers == "" && !publicGame) {
       ScaffoldMessenger.of(context)
           .showSnackBar(SnackBar(content: Text("Please fill all the fields")));
       return;
     }
+
     createGameTable.createGame(CreategameModel(
         game: gameName,
         creator: Supabase

@@ -1,4 +1,4 @@
-package com.example.new_game_app
+package com.darkgravestudios.gamebuddy
 
 import io.flutter.embedding.android.FlutterActivity
 

@@ -1,9 +1,9 @@
 import "package:flutter/material.dart";
-import "package:new_game_app/components/drawer_component.dart";
-import "package:new_game_app/database/auth/auth_service.dart";
-import "package:new_game_app/database/creategame_table.dart";
-import "package:new_game_app/pages/game_info.dart";
-import "package:new_game_app/sections/profile_section.dart";
+import "package:Gamebuddy/components/drawer_component.dart";
+import "package:Gamebuddy/database/auth/auth_service.dart";
+import "package:Gamebuddy/database/creategame_table.dart";
+import "package:Gamebuddy/pages/game_info.dart";
+import "package:Gamebuddy/sections/profile_section.dart";
 
 class InvitesPage extends StatefulWidget {
   const InvitesPage({super.key});

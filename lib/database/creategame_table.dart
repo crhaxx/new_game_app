@@ -1,4 +1,4 @@
-import 'package:new_game_app/database/database%20models/creategame_model.dart';
+import 'package:Gamebuddy/database/database%20models/creategame_model.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class CreategameTable {

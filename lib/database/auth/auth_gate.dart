@@ -1,8 +1,8 @@
 //INFO: Continuously check for auth state changes. Unauthenticated -> LoginPage, Authenticated -> HomePage
 
 import 'package:flutter/material.dart';
-import 'package:new_game_app/pages/home_page.dart';
-import 'package:new_game_app/pages/login_page.dart';
+import 'package:Gamebuddy/pages/home_page.dart';
+import 'package:Gamebuddy/pages/login_page.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class AuthGate extends StatelessWidget {

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:new_game_app/database/auth/auth_service.dart';
-import 'package:new_game_app/pages/login_page.dart';
+import 'package:Gamebuddy/database/auth/auth_service.dart';
+import 'package:Gamebuddy/pages/login_page.dart';
+import 'package:supabase_flutter/supabase_flutter.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -47,7 +48,6 @@ class _RegisterPageState extends State<RegisterPage> {
     }
 
     //Todo: Check if Email exists
-
     //Note: Try to sign up
     try {
       await authService.signUpWithEmailAndPassword(email, password, username);

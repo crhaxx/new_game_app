@@ -1,6 +1,7 @@
+import 'package:Gamebuddy/database/auth/auth_gate.dart';
 import 'package:flutter/material.dart';
-import 'package:new_game_app/database/auth/auth_service.dart';
-import 'package:new_game_app/pages/register_page.dart';
+import 'package:Gamebuddy/database/auth/auth_service.dart';
+import 'package:Gamebuddy/pages/register_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -32,6 +33,8 @@ class _LoginPageState extends State<LoginPage> {
     //Note: Try to login
     try {
       await authService.signInWithEmailAndPassword(email, password);
+      Navigator.push(
+          context, MaterialPageRoute(builder: (context) => AuthGate()));
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context)
