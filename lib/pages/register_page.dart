@@ -1,6 +1,8 @@
+import 'package:Gamebuddy/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:Gamebuddy/database/auth/auth_service.dart';
 import 'package:Gamebuddy/pages/login_page.dart';
+import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 
 class RegisterPage extends StatefulWidget {
@@ -62,9 +64,9 @@ class _RegisterPageState extends State<RegisterPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(color: Colors.grey.shade200),
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 70),
           children: [
@@ -126,6 +128,10 @@ class _RegisterPageState extends State<RegisterPage> {
               width: 50,
               child: ElevatedButton(
                 onPressed: signUp,
+                style: ElevatedButton.styleFrom(
+                  backgroundColor:
+                      Theme.of(context).colorScheme.secondary, // background
+                ),
                 child: Text(
                   "Sign Up",
                 ),
@@ -137,12 +143,33 @@ class _RegisterPageState extends State<RegisterPage> {
             ),
 
             GestureDetector(
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => LoginPage())),
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => LoginPage()));
+                  Navigator.pop(context);
+                },
                 child: Center(
                     child: Text(
                   "Have an account? Login",
-                )))
+                ))),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.light),
+            SizedBox(width: 15),
+            Text("Dark Mode"),
+            SizedBox(width: 75),
+            Switch(
+                value: isDark,
+                onChanged: (value) {
+                  Provider.of<ThemeProvider>(context, listen: false)
+                      .toggleTheme();
+                })
           ],
         ),
       ),

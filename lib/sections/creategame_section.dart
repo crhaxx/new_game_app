@@ -170,7 +170,17 @@ class _CreategamePageState extends State<CreategamePage> {
               SizedBox(
                 height: 20,
               ),
-              ElevatedButton(onPressed: createGame, child: Text("Create Game")),
+              ElevatedButton(
+                onPressed: createGame,
+                style: ButtonStyle(
+                    backgroundColor: WidgetStatePropertyAll<Color>(
+                        Theme.of(context).colorScheme.inverseSurface)),
+                child: Text(
+                  "Create Game",
+                  style:
+                      TextStyle(color: Theme.of(context).colorScheme.surface),
+                ),
+              ),
               SizedBox(
                 height: 30,
               ),

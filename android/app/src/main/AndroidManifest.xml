@@ -4,6 +4,7 @@
         android:label="Gamebuddy"
         android:name="${applicationName}"
         android:icon="@mipmap/gamebuddy">
+        
         <activity
             android:name=".MainActivity"
             android:exported="true"

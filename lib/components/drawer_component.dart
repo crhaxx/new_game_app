@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:Gamebuddy/pages/about_page.dart';
+import 'package:provider/provider.dart';
 
 class MyDrawer extends StatelessWidget {
   const MyDrawer({super.key});
@@ -18,7 +19,7 @@ class MyDrawer extends StatelessWidget {
               ),
               child: Center(
                 child: Text(
-                  "New Game App",
+                  "Gamebuddy",
                   style: TextStyle(
                       fontSize: 25,
                       fontWeight: FontWeight.w600,
@@ -32,11 +33,11 @@ class MyDrawer extends StatelessWidget {
             child: ListTile(
               title: Text(
                 "HOME",
-                style: TextStyle(color: Colors.grey.shade900),
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
               ),
               leading: Icon(
                 Icons.home,
-                color: Colors.grey.shade900,
+                color: Theme.of(context).colorScheme.primary,
               ),
               onTap: () => Navigator.pop(context),
             ),
@@ -45,12 +46,27 @@ class MyDrawer extends StatelessWidget {
             padding: const EdgeInsets.only(left: 60, top: 0),
             child: ListTile(
               title: Text(
-                "ABOUT",
-                style: TextStyle(color: Colors.grey.shade900),
+                "HISTORY",
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
               ),
               leading: Icon(
                 Icons.info,
-                color: Colors.grey.shade900,
+                color: Theme.of(context).colorScheme.primary,
+              ),
+              onTap: () => Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => AboutPage())),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.only(left: 60, top: 0),
+            child: ListTile(
+              title: Text(
+                "ABOUT",
+                style: TextStyle(color: Theme.of(context).colorScheme.primary),
+              ),
+              leading: Icon(
+                Icons.info,
+                color: Theme.of(context).colorScheme.primary,
               ),
               onTap: () => Navigator.push(context,
                   MaterialPageRoute(builder: (context) => AboutPage())),

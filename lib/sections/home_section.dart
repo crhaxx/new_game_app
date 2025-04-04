@@ -4,6 +4,7 @@ import "package:Gamebuddy/database/auth/auth_service.dart";
 import "package:Gamebuddy/database/creategame_table.dart";
 import "package:Gamebuddy/pages/game_info.dart";
 import "package:Gamebuddy/sections/profile_section.dart";
+import "package:supabase_flutter/supabase_flutter.dart";
 
 class InvitesPage extends StatefulWidget {
   const InvitesPage({super.key});
@@ -26,7 +27,14 @@ class _InvitesPageState extends State<InvitesPage> {
 
     void profile() {
       Navigator.push(
-          context, MaterialPageRoute(builder: (context) => ProfileSection()));
+          context,
+          MaterialPageRoute(
+              builder: (context) => ProfileSection(
+                    userName:
+                        '${Supabase.instance.client.auth.currentUser?.userMetadata?['username']}',
+                    userEmail:
+                        '${Supabase.instance.client.auth.currentUser?.userMetadata?['email']}',
+                  )));
     }
 
     return Scaffold(

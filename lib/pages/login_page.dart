@@ -1,7 +1,9 @@
 import 'package:Gamebuddy/database/auth/auth_gate.dart';
+import 'package:Gamebuddy/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:Gamebuddy/database/auth/auth_service.dart';
 import 'package:Gamebuddy/pages/register_page.dart';
+import 'package:provider/provider.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -33,8 +35,10 @@ class _LoginPageState extends State<LoginPage> {
     //Note: Try to login
     try {
       await authService.signInWithEmailAndPassword(email, password);
-      Navigator.push(
+      await Navigator.push(
           context, MaterialPageRoute(builder: (context) => AuthGate()));
+
+      Navigator.pop(context);
     } catch (e) {
       if (mounted) {
         ScaffoldMessenger.of(context)
@@ -45,9 +49,11 @@ class _LoginPageState extends State<LoginPage> {
 
   @override
   Widget build(BuildContext context) {
+    bool isDark = Theme.of(context).brightness == Brightness.dark;
     return Scaffold(
       body: Container(
-        decoration: BoxDecoration(color: Colors.grey.shade200),
+        /* decoration:
+            BoxDecoration(color: Theme.of(context).colorScheme.secondary), */
         child: ListView(
           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 70),
           children: [
@@ -91,7 +97,15 @@ class _LoginPageState extends State<LoginPage> {
             //Note: Login button
             ElevatedButton(
               onPressed: login,
-              child: const Text("Login"),
+              style: ElevatedButton.styleFrom(
+                backgroundColor:
+                    Theme.of(context).colorScheme.secondary, // background
+              ),
+              child: Text(
+                "Login",
+                style: TextStyle(
+                    color: Theme.of(context).colorScheme.inverseSurface),
+              ),
             ),
 
             SizedBox(
@@ -99,9 +113,30 @@ class _LoginPageState extends State<LoginPage> {
             ),
 
             GestureDetector(
-                onTap: () => Navigator.push(context,
-                    MaterialPageRoute(builder: (context) => RegisterPage())),
-                child: Center(child: Text("Don't have an account? Sign Up")))
+                onTap: () {
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => RegisterPage()));
+                  Navigator.pop(context);
+                },
+                child: Center(child: Text("Don't have an account? Sign Up"))),
+          ],
+        ),
+      ),
+      bottomNavigationBar: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.light),
+            SizedBox(width: 15),
+            Text("Dark Mode"),
+            SizedBox(width: 75),
+            Switch(
+                value: isDark,
+                onChanged: (value) {
+                  Provider.of<ThemeProvider>(context, listen: false)
+                      .toggleTheme();
+                })
           ],
         ),
       ),
