@@ -1,3 +1,5 @@
+import "package:Gamebuddy/components/no_internet_widget.dart";
+import "package:Gamebuddy/noti_service.dart";
 import "package:flutter/cupertino.dart";
 import "package:flutter/material.dart";
 import "package:Gamebuddy/database/creategame_table.dart";
@@ -26,6 +28,9 @@ class _CreategamePageState extends State<CreategamePage> {
   final _editGameNameController = TextEditingController();
 
   void createGame() {
+    //Note: show notification
+    NotiService().showNotification(title: 'Title', body: 'body');
+
     //Note: get values
     final gameName = _gameNameController.text;
     final invitedUsers = _invitedUsersController.text;
@@ -193,7 +198,7 @@ class _CreategamePageState extends State<CreategamePage> {
                   builder: (context, snapshot) {
                     //Info: loading
                     if (!snapshot.hasData) {
-                      return Center(child: CircularProgressIndicator());
+                      return NoInternetWidget();
                     }
 
                     //Info: loaded

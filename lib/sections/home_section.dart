@@ -1,3 +1,4 @@
+import "package:Gamebuddy/components/no_internet_widget.dart";
 import "package:flutter/material.dart";
 import "package:Gamebuddy/components/drawer_component.dart";
 import "package:Gamebuddy/database/auth/auth_service.dart";
@@ -50,7 +51,7 @@ class _InvitesPageState extends State<InvitesPage> {
           builder: (context, snapshot) {
             //Info: loading
             if (!snapshot.hasData) {
-              return Center(child: CircularProgressIndicator());
+              return NoInternetWidget();
             }
 
             //Info: loaded

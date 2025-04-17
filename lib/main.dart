@@ -1,15 +1,28 @@
+import 'package:Gamebuddy/noti_service.dart';
 import 'package:Gamebuddy/theme/theme.dart';
 import 'package:Gamebuddy/theme/theme_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:Gamebuddy/database/auth/auth_gate.dart';
+import 'package:permission_handler/permission_handler.dart';
 import 'package:provider/provider.dart';
 import 'package:supabase_flutter/supabase_flutter.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  //Info: init notifications
+  NotiService().initNotification();
+
   await dotenv.load(fileName: '.env');
   await Supabase.initialize(
       anonKey: dotenv.env['anonKey'] ?? "", url: dotenv.env['url'] ?? "");
+
+  await Permission.notification.isDenied.then((value) {
+    if (value) {
+      Permission.notification.request();
+    }
+  });
   runApp(ChangeNotifierProvider(
     create: (context) => ThemeProvider(),
     child: const MainApp(),
