@@ -5,6 +5,7 @@ class CreategameModel {
   String? creator_email;
   String? created_at;
   String invited_users;
+  String creator_id;
   bool public;
 
   CreategameModel({
@@ -14,6 +15,7 @@ class CreategameModel {
     required this.creator_email,
     this.created_at,
     required this.invited_users,
+    required this.creator_id,
     required this.public,
   });
 
@@ -27,6 +29,7 @@ class CreategameModel {
       created_at: map['created_at'] as String,
       invited_users: map['invited_users'] as String,
       public: map['public'] as bool,
+      creator_id: map['creator_id'] as String,
     );
   }
 
@@ -38,6 +41,7 @@ class CreategameModel {
       'creator_email': creator_email,
       'invited_users': invited_users,
       'public': public,
+      'creator_id': creator_id,
     };
   }
 }

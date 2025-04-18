@@ -26,7 +26,7 @@ class _InvitesPageState extends State<InvitesPage> {
       await authService.signOut();
     }
 
-    void profile() {
+    void profile() async {
       Navigator.push(
           context,
           MaterialPageRoute(

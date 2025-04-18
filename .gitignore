@@ -48,3 +48,7 @@ app.*.map.json
 # Playstore
 upload-keystore.jks
 key.properties
+
+# Supabase
+/supabase/functions/service_account.json
+/supabase/.env

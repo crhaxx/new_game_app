@@ -6,7 +6,10 @@ import "package:Gamebuddy/database/creategame_table.dart";
 import "package:Gamebuddy/database/database%20models/creategame_model.dart";
 import "package:Gamebuddy/pages/game_info.dart";
 import "package:Gamebuddy/pages/home_page.dart";
+import "package:flutter_dotenv/flutter_dotenv.dart";
 import "package:supabase_flutter/supabase_flutter.dart";
+import 'package:http/http.dart' as http;
+import 'dart:convert'; // <- tohle je důležité pro práci s JSON
 
 class CreategamePage extends StatefulWidget {
   const CreategamePage({super.key});
@@ -27,9 +30,46 @@ class _CreategamePageState extends State<CreategamePage> {
   final _editInvitedUsersController = TextEditingController();
   final _editGameNameController = TextEditingController();
 
-  void createGame() {
-    //Note: show notification
-    NotiService().showNotification(title: 'Title', body: 'body');
+  String invitedusersid = '';
+
+  Future getUserId() async {
+    await dotenv.load(fileName: '.env');
+    final url = Uri.parse(
+        'https://gjsjrcbshgkaviwdtxnn.supabase.co/auth/v1/admin/users');
+    final serviceRoleKey = dotenv.env['service_role']!;
+
+    final response = await http.get(
+      url,
+      headers: {
+        'apikey': serviceRoleKey,
+        'Authorization': 'Bearer $serviceRoleKey',
+      },
+    );
+
+    if (response.statusCode == 200) {
+      final data = jsonDecode(response.body);
+
+      final users = data['users'] as List<dynamic>;
+      final user = users.firstWhere(
+        (u) => u['email'] == 'nikola.crhak@gmail.com',
+        orElse: () => null,
+      );
+
+      if (user != null) {
+        print('ID uživatele: ${user['id']}');
+        invitedusersid = user['id'] + ',508264c2-b67f-4615-be18-2801ed39c1c2';
+      } else {
+        print('Uživatel s daným emailem nebyl nalezen.');
+      }
+    } else {
+      print("Error: ${response.statusCode}");
+      print("Response body: ${response.body}");
+    }
+  }
+
+  void createGame() async {
+    // //Note: show notification
+    // NotiService().showNotification(title: 'Title', body: 'body');
 
     //Note: get values
     final gameName = _gameNameController.text;
@@ -52,13 +92,16 @@ class _CreategamePageState extends State<CreategamePage> {
       return;
     }
 
+    await getUserId();
+
     createGameTable.createGame(CreategameModel(
         game: gameName,
         creator: Supabase
             .instance.client.auth.currentUser?.userMetadata?['username'],
         creator_email: Supabase.instance.client.auth.currentUser?.email,
-        invited_users: invitedUsers,
-        public: publicGame));
+        invited_users: invitedusersid, //invitedUsers
+        public: publicGame,
+        creator_id: Supabase.instance.client.auth.currentUser!.id));
 
     ScaffoldMessenger.of(context)
         .showSnackBar(SnackBar(content: Text("Game created successfully")));

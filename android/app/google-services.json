@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "320743486086",
+    "project_id": "gamebuddy-app",
+    "storage_bucket": "gamebuddy-app.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:320743486086:android:111b3ae9dbb7f3f2e51707",
+        "android_client_info": {
+          "package_name": "com.darkgravestudios.gamebuddy"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyATUk4TmK-h6eS7iBKxPtfMOY-WmgeaYyY"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
