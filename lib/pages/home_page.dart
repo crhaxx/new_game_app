@@ -37,10 +37,10 @@ class _HomePageState extends State<HomePage> {
     FirebaseMessaging.onMessage.listen((payload) {
       final notification = payload.notification;
 
-      if (notification != null) {
-        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-            content: Text('${notification.title} ${notification.body}')));
-      }
+      // if (notification != null) {
+      //   ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      //       content: Text('${notification.title} ${notification.body}')));
+      // }
     });
   }
 

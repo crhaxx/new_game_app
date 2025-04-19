@@ -23,6 +23,7 @@ class _InvitesPageState extends State<InvitesPage> {
 
     //Note: Logout
     void logout() async {
+      Navigator.pop(context);
       await authService.signOut();
     }
 

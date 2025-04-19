@@ -1,7 +1,7 @@
 name: "Gamebuddy"
 description: "App to play games with friends"
 publish_to: "none"
-version: 0.1.4+5
+version: 0.1.5+6
 
 environment:
   sdk: ^3.6.0

@@ -48,6 +48,7 @@ class _CreategamePageState extends State<CreategamePage> {
 
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
+      print(data);
 
       final users = data['users'] as List<dynamic>;
       final user = users.firstWhere(
@@ -57,7 +58,9 @@ class _CreategamePageState extends State<CreategamePage> {
 
       if (user != null) {
         print('ID uživatele: ${user['id']}');
-        invitedusersid = user['id'] + ',508264c2-b67f-4615-be18-2801ed39c1c2';
+        invitedusersid = user['id'] +
+            ',ed97283e-b3be-4084-bfe2-681024d24e9f' +
+            ',9b745908-5600-4dfb-9be8-69813269d7ee';
       } else {
         print('Uživatel s daným emailem nebyl nalezen.');
       }
